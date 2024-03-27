@@ -125,10 +125,50 @@ public class BibliotecaGestion {
      /**
         *Prestamo
         *Metodos: Agregar, ver prestamo, eliminar prestamo(devolucion) 
+     * @param documento
+     * @param nombreLibro
     */
-      public void agregarPrestamo(int documento, String nombreLibro) {
-        Prestamo prestamos = new Prestamo(documento, nombreLibro);
-        this.prestamos.add(prestamos);
+    public void agregarPrestamo(int documento, String nombreLibro) {
+     // Verificar si el usuario existe
+     boolean usuarioExiste = false;
+     for (Usuario usuario : usuarios) {
+         if (usuario.getDocumento() == documento) {
+             usuarioExiste = true;
+             break;
+         }
+     }
+
+     if (!usuarioExiste) {
+         System.out.println("El usuario con documento \"" + documento + "\" no está registrado.");
+         return; // Salir del método si el usuario no está registrado
+     }
+
+     // Verificar si el libro existe
+     boolean libroExiste = false;
+     for (Libro libro : libros) {
+         if (libro.getTitulo().equals(nombreLibro)) {
+             libroExiste = true;
+             break;
+         }
+     }
+
+     if (!libroExiste) {
+         System.out.println("El libro \"" + nombreLibro + "\" no está registrado.");
+         return; // Salir del método si el libro no está registrado
+     }
+
+     // Verificar si el préstamo ya está registrado
+     for (Prestamo prestamo : prestamos) {
+         if (prestamo.getDocumentoUser() == documento && prestamo.getNombreLibro().equals(nombreLibro)) {
+             System.out.println("El préstamo para el usuario con documento \"" + documento + "\" y el libro \"" + nombreLibro + "\" ya está registrado.");
+             return; // Salir del método si el préstamo ya está registrado
+         }
+     }
+
+     // Si el préstamo no está registrado, agregarlo
+     Prestamo nuevoPrestamo = new Prestamo(documento, nombreLibro);
+     prestamos.add(nuevoPrestamo);
+     System.out.println("Préstamo registrado exitosamente para el usuario con documento \"" + documento + "\" y el libro \"" + nombreLibro + "\".");
     }
       
       // Buscar un libro por título
