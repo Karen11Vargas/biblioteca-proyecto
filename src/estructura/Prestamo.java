@@ -33,6 +33,11 @@ public class Prestamo {
     public void setNombreLibro(String nombreLibro) {
         this.nombreLibro = nombreLibro;
     }
+
+    @Override
+    public String toString() {
+        return "Prestamo{" + "documentoUser=" + documentoUser + ", nombreLibro=" + nombreLibro + '}';
+    }
   
     
     

@@ -12,6 +12,7 @@ public class Libro {
     private String titulo;
     private String autor;
     private int publicacion;
+    
 
     public Libro(String titulo, String autor, int publicacion) {
         this.titulo = titulo;
@@ -23,25 +24,22 @@ public class Libro {
         return titulo;
     }
 
-    public void setTitulo(String titulo) {
-        this.titulo = titulo;
-    }
+    
 
     public String getAutor() {
         return autor;
     }
 
-    public void setAutor(String autor) {
-        this.autor = autor;
-    }
+    
 
     public int getPublicacion() {
         return publicacion;
     }
 
-    public void setPublicacion(int publicacion) {
-        this.publicacion = publicacion;
+     @Override
+    public String toString() {
+        return "Libro: " + titulo + " - Autor: " + autor + " - Publicación: " + publicacion;
     }
-    
+   
    
 }
