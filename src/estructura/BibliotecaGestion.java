@@ -34,20 +34,20 @@ public class BibliotecaGestion {
     public void agregarLibro(String nombre, String autor, int ano) {
         Libro libro = new Libro(nombre, autor, ano);
         libros.add(libro);
+        System.out.println("Libro \"" + libro.getTitulo() + "\" ingresado con Exito");
     }
     
     public void eliminarLibro(String nombreLibro) {
        
-        // Iterar sobre la lista de libros
        for (Libro libro : libros) {
-           // Si el nombre del libro coincide, eliminarlo de la lista
+          
            if (libro.getTitulo().equals(nombreLibro)) {
                libros.remove(libro);
                System.out.println("Libro eliminado: " + libro.getTitulo());
-               return; // Importante salir del método después de eliminar el libro
+               return; 
            }
        }
-       // Si no se encuentra el libro con el nombre proporcionado
+   
        System.out.println("El libro \"" + nombreLibro + "\" no fue encontrado en la lista.");
       
        
@@ -57,7 +57,7 @@ public class BibliotecaGestion {
     public Libro buscarLibroNombre(String titulo) {
         for (Libro libro : libros) {
             if (libro.getTitulo().equals(titulo)) {
-                 System.out.print(libro);
+                 System.out.println(libro);
                 return libro;
             }
         }
@@ -68,21 +68,25 @@ public class BibliotecaGestion {
     // Lista todos
     public Libro buscarLibro() {
         for (Libro libro : libros) {
-            System.out.print(libros);
+            System.out.println(libros);
             return libro;
         }
-         System.out.println("No hay libros");
-        return null; // Si no se encuentra el libro
+         System.out.println("No hay libros registrados");
+        return null;
     }
     
      /**
         *Usuario
         *Metodos: Agregar,buscar
+     * @param documento
+     * @param nombre
     */
     
      public void agregarUsuario(int documento, String nombre) {
         Usuario usuario = new Usuario(documento, nombre);
         usuarios.add(usuario);
+        System.out.println("Usuario \"" + usuario.getNombre() + "\" ingresado con Exito");
+
     }
      
      
@@ -92,20 +96,19 @@ public class BibliotecaGestion {
             
             if (usuario.getDocumento() == documento) {
                 usuarios.remove(usuario);
-                System.out.println("Usuario eliminado: " + usuario);
+               System.out.println("Usuario eliminado: " + usuario.getNombre());
                 return;
             }
         }
-        // Si no se encuentra el usuario con el nombre proporcionado
         System.out.println("El usuario \"" + documento + "\" no fue encontrado en la lista.");
     }
     
     
-    // Buscar un libro por título
+ 
     public Usuario buscarUser(int documento) {
         for (Usuario usuario : usuarios) {
             if (usuario.getDocumento() == documento) {
-                System.out.print(usuario);
+                System.out.println(usuario);
                 return usuario;
             }
         }
@@ -116,10 +119,10 @@ public class BibliotecaGestion {
     // Lista todos
     public Usuario buscarAll() {
         for (Usuario usuario : usuarios) {
-            System.out.print(usuarios);
+            System.out.println(usuarios);
             return usuario;
         }
-         System.out.println("No hay usuarios");
+         System.out.println("No hay usuarios registrados");
         return null;
     }
      /**
@@ -129,8 +132,10 @@ public class BibliotecaGestion {
      * @param nombreLibro
     */
     public void agregarPrestamo(int documento, String nombreLibro) {
-     // Verificar si el usuario existe
+    
      boolean usuarioExiste = false;
+     boolean libroExiste = false;
+     
      for (Usuario usuario : usuarios) {
          if (usuario.getDocumento() == documento) {
              usuarioExiste = true;
@@ -140,11 +145,9 @@ public class BibliotecaGestion {
 
      if (!usuarioExiste) {
          System.out.println("El usuario con documento \"" + documento + "\" no está registrado.");
-         return; // Salir del método si el usuario no está registrado
+         return; 
      }
 
-     // Verificar si el libro existe
-     boolean libroExiste = false;
      for (Libro libro : libros) {
          if (libro.getTitulo().equals(nombreLibro)) {
              libroExiste = true;
@@ -154,14 +157,14 @@ public class BibliotecaGestion {
 
      if (!libroExiste) {
          System.out.println("El libro \"" + nombreLibro + "\" no está registrado.");
-         return; // Salir del método si el libro no está registrado
+         return; 
      }
 
      // Verificar si el préstamo ya está registrado
      for (Prestamo prestamo : prestamos) {
          if (prestamo.getDocumentoUser() == documento && prestamo.getNombreLibro().equals(nombreLibro)) {
              System.out.println("El préstamo para el usuario con documento \"" + documento + "\" y el libro \"" + nombreLibro + "\" ya está registrado.");
-             return; // Salir del método si el préstamo ya está registrado
+             return;
          }
      }
 
@@ -171,7 +174,7 @@ public class BibliotecaGestion {
      System.out.println("Préstamo registrado exitosamente para el usuario con documento \"" + documento + "\" y el libro \"" + nombreLibro + "\".");
     }
       
-      // Buscar un libro por título
+     // Buscar un libro por título
     public List<String> prestamosUser(int documento) {
        List<String> prestamosUsuario = new ArrayList<>();
        for (Prestamo prestamo : prestamos) {
@@ -180,9 +183,9 @@ public class BibliotecaGestion {
            }
        }
        if (!prestamosUsuario.isEmpty()) {
-           System.out.print("El usuario con documento \"" + documento + "\" tiene los siguientes préstamos: ");
+           System.out.println("El usuario con documento \"" + documento + "\" tiene los siguientes préstamos: ");
            for (String nombreLibro : prestamosUsuario) {
-               System.out.print(nombreLibro + ", ");
+               System.out.println(nombreLibro + ", ");
            }
            System.out.println();
        } else {
@@ -201,9 +204,9 @@ public class BibliotecaGestion {
            }
        }
        if (!prestamosLibro.isEmpty()) {
-           System.out.print("El libro \"" + nombre + "\" tiene los siguientes préstamos: ");
+           System.out.println("El libro \"" + nombre + "\" tiene prestamo con los siguientes documentos: ");
            for (Integer documento : prestamosLibro) {
-               System.out.print(documento + " ");
+               System.out.println(documento + " ");
            }
            System.out.println();
        } else {

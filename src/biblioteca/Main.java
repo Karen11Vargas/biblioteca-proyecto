@@ -34,39 +34,44 @@ public class Main {
 
         
             if (opcionP == 1) {
-                System.out.println("Ingrese una opcion: 1. Agregar, 2.Buscar,3.borrar, 4.Buscar libro");
+                System.out.println("Ingrese una opcion: 1. Agregar Libro, 2.Ver Libros ,3.Eliminar Libro, 4.Buscar libro");
                 int opcion = sc.nextInt();
 
                 switch (opcion) {
                 case 1:
-                    System.out.println("Agregar Libro");
+                    System.out.println("/////--- Agregar Libro ---- /////");
                     System.out.println("Ingrese nombre libro");
                     String nombre = sc.next();
 
                     System.out.println("Ingrese nombre autor");
                     String autor = sc.next();
 
-                    System.out.println("Ingrese año publicacion");
+                    System.out.println("Ingrese fecha publicacion");
                     int publicacion = sc.nextInt();
 
                     if (!nombre.isEmpty() && !autor.isEmpty() ) {
                         gestion.agregarLibro(nombre, autor, publicacion);
-                        System.out.println("Ingresado con exito");
+                      
                     }else{
-                        System.out.println("Ingresado nombre y autor");
+                        System.out.println("Ingrese los datos");
                     }
 
                     break;
                 case 2:
+                    System.out.println("/////--- Libros ---- /////");
                     gestion.buscarLibro();
                     break;
                 case 3:
+                  System.out.println("/////--- Eliminar Libro ---- /////");
+
                   System.out.println("Ingrese nombre libro a eliminar:");
                     String nombreLibroEliminar = sc.next();
                     gestion.eliminarLibro(nombreLibroEliminar);
                     break;
 
                 case 4:
+                   System.out.println("/////--- Buscar Libro ---- /////");
+
                   System.out.println("Ingrese nombre libro a buscar:");
                     String nombreLibro = sc.next();
                     gestion.buscarLibroNombre(nombreLibro);
@@ -76,29 +81,30 @@ public class Main {
                    opcionP = 1;
                 }
             }else if(opcionP == 2){
-                 System.out.println("Ingrese una opcion: 1. Agregar, 2.Buscar,3.borrar, 4.Buscar usuario");
+                 System.out.println("Ingrese una opcion: 1. Agregar Usuario, 2.Ver Usuarios ,3.Eliminar Usuario, 4.Buscar Usuario");
                 int opcion = sc.nextInt();
 
                 switch (opcion) {
                 case 1:
-                    System.out.println("Agregar Usuario");
+                    System.out.println("///// ---- Agregar Usuario ----/////");
                     System.out.println("Ingrese documento");
                     int documento = sc.nextInt();
 
                     System.out.println("Ingrese nombre");
                     String nombre = sc.next();
 
-               
+                    
                     gestion.agregarUsuario(documento,nombre);
-                    System.out.println("Ingresado con exito");
                     
                     break;
                 case 2:
+                    System.out.println("/////--- Usuarios ---- /////");
+
                     gestion.buscarAll();
-                     
                     break;
                 case 3:
-                   
+                    System.out.println("/////--- Eliminar Usuario---- /////");
+
                   System.out.println("Ingrese  documento a eliminar:");
                     int docEliminar = sc.nextInt();
                     gestion.eliminarUsuario(docEliminar);
@@ -106,6 +112,8 @@ public class Main {
                     break;
 
                 case 4:
+                     System.out.println("/////--- Buscar Usuario---- /////");
+
                   System.out.println("Ingrese documento usuario a buscar:");
                     int documentoUser = sc.nextInt();
                     gestion.buscarUser(documentoUser);
@@ -115,11 +123,13 @@ public class Main {
                    
                 }
             }else if (opcionP == 3){
-                System.out.println("Ingrese una opcion: 1. Agregar, 2.Buscar Usuario,3.borrar, 4.Buscar Libro");
+                System.out.println("Ingrese una opcion: 1. Hacer Prestamo, 2.Buscar Usuario,3.Devolcuion, 4.Buscar Libros Prestados");
                 int opcion = sc.nextInt();
 
                 switch (opcion) {
                 case 1:
+                     System.out.println("/////--- Realizar Prestamo---- /////");
+
                     System.out.println("Ingrese documento");
                     int documento = sc.nextInt();
 
@@ -132,6 +142,8 @@ public class Main {
                     
                     break;
                 case 2:
+                    System.out.println("/////--- Buscar Prestamos de un Usuario ---- /////");
+
                     System.out.println("Ingrese documento");
                     int documentoPrestamo = sc.nextInt();
                     
@@ -139,7 +151,8 @@ public class Main {
                      
                     break;
                 case 3:
-                   
+                    System.out.println("/////--- Devolucion ---- /////");
+
                     System.out.println("Ingrese documento");
                     int documentoE = sc.nextInt();
 
@@ -152,7 +165,9 @@ public class Main {
                     break;
 
                 case 4:
-                  System.out.println("Ingrese NOMBRE LIBRO");
+                  System.out.println("/////--- Buscar Libro  Prestado---- /////");
+
+                  System.out.println("Ingrese nombre del Libro");
                     String nombreB = sc.next();
                     gestion.prestamosLibro(nombreB);
                 break;
