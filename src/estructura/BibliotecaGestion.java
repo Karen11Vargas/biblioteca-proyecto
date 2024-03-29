@@ -7,6 +7,7 @@ package estructura;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -20,7 +21,7 @@ public class BibliotecaGestion {
     private List<Prestamo> prestamos;
 
   
-      public BibliotecaGestion() {
+    public BibliotecaGestion() {
         this.libros = new ArrayList<>();
         this.usuarios = new ArrayList<>();
         this.prestamos = new ArrayList<>();
@@ -29,49 +30,60 @@ public class BibliotecaGestion {
     /**
         *Libros
         *Metodos: Agregar, listar, buscar, 
+     * @param nombre
+     * @param autor
+     * @param ano
     */
     
     public void agregarLibro(String nombre, String autor, int ano) {
         Libro libro = new Libro(nombre, autor, ano);
         libros.add(libro);
-        System.out.println("Libro \"" + libro.getTitulo() + "\" ingresado con Exito");
+        JOptionPane.showMessageDialog(null, "Libro \"" + libro.getTitulo() + "\" ingresado con Exito"); 
     }
     
     public void eliminarLibro(String nombreLibro) {
        
        for (Libro libro : libros) {
-          
            if (libro.getTitulo().equals(nombreLibro)) {
                libros.remove(libro);
-               System.out.println("Libro eliminado: " + libro.getTitulo());
+                 JOptionPane.showMessageDialog(null, "Libro eliminado: \"" + libro.getTitulo() + "\" exitosamente"); 
                return; 
            }
        }
-   
-       System.out.println("El libro \"" + nombreLibro + "\" no fue encontrado en la lista.");
-      
+       JOptionPane.showMessageDialog(null, "El libro \"" + nombreLibro + "\" no fue encontrado en la lista.");       
        
     }
      
     // Buscar un libro por título
     public Libro buscarLibroNombre(String titulo) {
+        StringBuilder mensaje = new StringBuilder();
+        mensaje.append("Libro:\n");
         for (Libro libro : libros) {
             if (libro.getTitulo().equals(titulo)) {
-                 System.out.println(libro);
+                mensaje.append("- ").append(libro).append("\n");
+                 JOptionPane.showMessageDialog(null, mensaje.toString());
                 return libro;
             }
         }
-       System.out.println("El libro \"" + titulo + "\" no fue encontrado en la lista.");
-        return null; // Si no se encuentra el libro
+        JOptionPane.showMessageDialog(null, "El libro \"" + titulo + "\" no fue encontrado en la lista"); 
+        return null; 
     }
     
     // Lista todos
     public Libro buscarLibro() {
-        for (Libro libro : libros) {
-            System.out.println(libros);
-            return libro;
+        StringBuilder mensaje = new StringBuilder();
+        mensaje.append("Libros:\n");
+        
+        if (libros.isEmpty()) {
+        JOptionPane.showMessageDialog(null, "No hay libros registrados");
+        return null;
         }
-         System.out.println("No hay libros registrados");
+           
+
+        for (Libro libro : libros) {
+            mensaje.append("- ").append(libro).append("\n");
+        }
+        JOptionPane.showMessageDialog(null, mensaje.toString());
         return null;
     }
     
@@ -85,7 +97,7 @@ public class BibliotecaGestion {
      public void agregarUsuario(int documento, String nombre) {
         Usuario usuario = new Usuario(documento, nombre);
         usuarios.add(usuario);
-        System.out.println("Usuario \"" + usuario.getNombre() + "\" ingresado con Exito");
+        JOptionPane.showMessageDialog(null, "Usuario \"" + usuario.getNombre() + "\" ingresado con Exito"); 
 
     }
      
@@ -93,36 +105,48 @@ public class BibliotecaGestion {
     public void eliminarUsuario(int documento) {
     
         for (Usuario usuario : usuarios) {
-            
             if (usuario.getDocumento() == documento) {
                 usuarios.remove(usuario);
-               System.out.println("Usuario eliminado: " + usuario.getNombre());
+                JOptionPane.showMessageDialog(null, "Usuario eliminado: " + usuario.getNombre() + "\" exitosamnte"); 
                 return;
             }
         }
-        System.out.println("El usuario \"" + documento + "\" no fue encontrado en la lista.");
+        JOptionPane.showMessageDialog(null, "El usuario \"" + documento + "\" no fue encontrado en la lista."); 
     }
     
     
  
     public Usuario buscarUser(int documento) {
+        
+        StringBuilder mensaje = new StringBuilder();
+        mensaje.append("Documento:\n");
         for (Usuario usuario : usuarios) {
             if (usuario.getDocumento() == documento) {
-                System.out.println(usuario);
+                mensaje.append("- ").append(usuario).append("\n");
+                JOptionPane.showMessageDialog(null, mensaje.toString());
                 return usuario;
             }
         }
-       System.out.println("El usuario \"" + documento + "\" no fue encontrado en la lista.");
+        JOptionPane.showMessageDialog(null, "El usuario \"" + documento + "\" no fue encontrado.");
         return null; 
     }
     
     // Lista todos
     public Usuario buscarAll() {
-        for (Usuario usuario : usuarios) {
-            System.out.println(usuarios);
-            return usuario;
+        
+        StringBuilder mensaje = new StringBuilder();
+        mensaje.append("Usuarios:\n");
+        
+        if (usuarios.isEmpty()) {
+        JOptionPane.showMessageDialog(null, "No hay usuarios registrados");
+        return null;
         }
-         System.out.println("No hay usuarios registrados");
+           
+
+        for (Usuario usuario : usuarios) {
+            mensaje.append("- ").append(usuario).append("\n");
+        }
+        JOptionPane.showMessageDialog(null, mensaje.toString());
         return null;
     }
      /**
@@ -144,7 +168,7 @@ public class BibliotecaGestion {
      }
 
      if (!usuarioExiste) {
-         System.out.println("El usuario con documento \"" + documento + "\" no está registrado.");
+         JOptionPane.showMessageDialog(null, "El usuario con documento \"" + documento + "\" no está registrado.");
          return; 
      }
 
@@ -156,14 +180,15 @@ public class BibliotecaGestion {
      }
 
      if (!libroExiste) {
-         System.out.println("El libro \"" + nombreLibro + "\" no está registrado.");
+         JOptionPane.showMessageDialog(null, "El libro \"" + nombreLibro + "\" no está registrado.");
          return; 
      }
 
      // Verificar si el préstamo ya está registrado
      for (Prestamo prestamo : prestamos) {
          if (prestamo.getDocumentoUser() == documento && prestamo.getNombreLibro().equals(nombreLibro)) {
-             System.out.println("El préstamo para el usuario con documento \"" + documento + "\" y el libro \"" + nombreLibro + "\" ya está registrado.");
+             
+            JOptionPane.showMessageDialog(null, "El préstamo para el usuario con documento \"" + documento + "\" y el libro \"" + nombreLibro + "\" ya está registrado.");
              return;
          }
      }
@@ -171,10 +196,10 @@ public class BibliotecaGestion {
      // Si el préstamo no está registrado, agregarlo
      Prestamo nuevoPrestamo = new Prestamo(documento, nombreLibro);
      prestamos.add(nuevoPrestamo);
-     System.out.println("Préstamo registrado exitosamente para el usuario con documento \"" + documento + "\" y el libro \"" + nombreLibro + "\".");
+     JOptionPane.showMessageDialog(null, "Préstamo registrado exitosamente para el usuario con documento \"" + documento + "\" y el libro \"" + nombreLibro + "\".");
     }
       
-     // Buscar un libro por título
+    // Buscar un libro por título
     public List<String> prestamosUser(int documento) {
        List<String> prestamosUsuario = new ArrayList<>();
        for (Prestamo prestamo : prestamos) {
@@ -183,13 +208,13 @@ public class BibliotecaGestion {
            }
        }
        if (!prestamosUsuario.isEmpty()) {
-           System.out.println("El usuario con documento \"" + documento + "\" tiene los siguientes préstamos: ");
+           JOptionPane.showMessageDialog(null, "El usuario con documento \"" + documento + "\" tiene los siguientes préstamos:");
            for (String nombreLibro : prestamosUsuario) {
-               System.out.println(nombreLibro + ", ");
+               JOptionPane.showMessageDialog(null, nombreLibro + ", ");
            }
            System.out.println();
        } else {
-           System.out.println("El usuario con documento \"" + documento + "\" no tiene préstamos.");
+           JOptionPane.showMessageDialog(null, "El usuario con documento \"" + documento + "\" no tiene préstamos.");
        }
        return prestamosUsuario;
    }
@@ -204,28 +229,29 @@ public class BibliotecaGestion {
            }
        }
        if (!prestamosLibro.isEmpty()) {
-           System.out.println("El libro \"" + nombre + "\" tiene prestamo con los siguientes documentos: ");
+           JOptionPane.showMessageDialog(null, "El libro \"" + nombre + "\" tiene prestamo con los siguientes documentos: ");
            for (Integer documento : prestamosLibro) {
-               System.out.println(documento + " ");
+               JOptionPane.showMessageDialog(null, documento + ", ");
            }
            System.out.println();
        } else {
-           System.out.println("El libro \"" + nombre + "\" no tiene préstamos.");
+           JOptionPane.showMessageDialog(null, "El libro \"" + nombre + "\" no tiene préstamos.");
        }
        return prestamosLibro;
    }
     
-     public void devolucion(int documento, String nombreLibro) {
+    public void devolucion(int documento, String nombreLibro) {
         Iterator<Prestamo> iterator = prestamos.iterator();
         while (iterator.hasNext()) {
             Prestamo prestamo = iterator.next();
             if (prestamo.getDocumentoUser() == documento && prestamo.getNombreLibro().equals(nombreLibro)) {
                 iterator.remove();
-                System.out.println("Libro \"" + prestamo.getNombreLibro() + "\" devuelto");
+                JOptionPane.showMessageDialog(null, "Libro \"" + prestamo.getNombreLibro() + "\" devuelto");
                 return;
             }
         }
-        System.out.println("El usuario con documento \"" + documento + "\" no tiene el libro \"" + nombreLibro + "\" por devolver.");
+        JOptionPane.showMessageDialog(null, "El usuario con documento \"" + documento + "\" no tiene el libro \"" + nombreLibro + "\" por devolver.");
+
     }
     
 }
