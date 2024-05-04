@@ -4,6 +4,8 @@
  */
 package estructura;
 
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author karen_b
@@ -23,9 +25,11 @@ public class ArbolPrestamo {
     public void InsertarDatos(int documento,String nom){
         
         PrestamoNodo nuevo = new PrestamoNodo(documento,nom);
-        if (estaVacio())
+        if (estaVacio()){
             Raiz = nuevo;
-        else {
+            JOptionPane.showMessageDialog(null, "Prestamo a \"" + nuevo.documento + "\" ingresado con Exito");
+
+        }else {
             PrestamoNodo aux = Raiz, Padre;
             while (true) {
                 Padre = aux;
@@ -33,12 +37,16 @@ public class ArbolPrestamo {
                     aux = aux.HijoIzq;
                     if (aux == null){
                         Padre.HijoIzq = nuevo;
+                        JOptionPane.showMessageDialog(null, "Prestamo a \"" + nuevo.documento + "\" ingresado con Exito");
+
                         return;
                     }
                 } else {
                     aux = aux.HijoDer;
                     if (aux == null){
                         Padre.HijoDer = nuevo;
+                        JOptionPane.showMessageDialog(null, "Prestamo a \"" + nuevo.documento + "\" ingresado con Exito");
+
                         return;
                     }
                 }

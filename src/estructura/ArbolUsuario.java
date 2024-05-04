@@ -4,6 +4,8 @@
  */
 package estructura;
 
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author karen_b
@@ -21,9 +23,11 @@ public class ArbolUsuario {
     
     public void InsertarDatos(int documento,String nom){
         UsuarioNodo nuevo = new UsuarioNodo(documento,nom);
-        if (estaVacio())
+        if (estaVacio()){
             Raiz = nuevo;
-        else {
+              JOptionPane.showMessageDialog(null, "Usuario \"" + nuevo.Dato + "\" ingresado con Exito");
+
+        }else {
             UsuarioNodo aux = Raiz, Padre;
             while (true) {
                 Padre = aux;
@@ -31,12 +35,16 @@ public class ArbolUsuario {
                     aux = aux.HijoIzq;
                     if (aux == null){
                         Padre.HijoIzq = nuevo;
+                        JOptionPane.showMessageDialog(null, "Usuario \"" + nuevo.Dato + "\" ingresado con Exito");
+
                         return;
                     }
                 } else {
                     aux = aux.HijoDer;
                     if (aux == null){
                         Padre.HijoDer = nuevo;
+                        JOptionPane.showMessageDialog(null, "Usuario \"" + nuevo.Dato + "\" ingresado con Exito");
+
                         return;
                     }
                 }
@@ -77,19 +85,28 @@ public class ArbolUsuario {
 
     private UsuarioNodo eliminarRecursivo(UsuarioNodo nodo, int dato) {
         if (nodo == null) {
+            JOptionPane.showMessageDialog(null, "No se encontró el usuario", "Error de Eliminación", JOptionPane.WARNING_MESSAGE);
             return nodo;
         }
 
         if (dato < nodo.Dato) {
             nodo.HijoIzq = eliminarRecursivo(nodo.HijoIzq, dato);
+            JOptionPane.showMessageDialog(null, "Usuario " + dato + " eliminado exitosamente", "Eliminación Exitosa", JOptionPane.INFORMATION_MESSAGE);
+
         }
         else if (dato > nodo.Dato) {
             nodo.HijoDer = eliminarRecursivo(nodo.HijoDer, dato);
+            JOptionPane.showMessageDialog(null, "Usuario " + dato + " eliminado exitosamente", "Eliminación Exitosa", JOptionPane.INFORMATION_MESSAGE);
+
         }
         else {
             if (nodo.HijoIzq == null) {
+            JOptionPane.showMessageDialog(null, "Usuario " + dato + " eliminado exitosamente", "Eliminación Exitosa", JOptionPane.INFORMATION_MESSAGE);
+
                 return nodo.HijoDer;
             } else if (nodo.HijoDer == null) {
+            JOptionPane.showMessageDialog(null, "Usuario " + dato + " eliminado exitosamente", "Eliminación Exitosa", JOptionPane.INFORMATION_MESSAGE);
+
                 return nodo.HijoIzq;
             }
 

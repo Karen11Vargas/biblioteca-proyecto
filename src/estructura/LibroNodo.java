@@ -26,6 +26,6 @@ public class LibroNodo {
     }
     public String tostring()
     {
-      return Nombre +"Su datos es "+ Dato + "Autor: " + Autor;
+      return Nombre +"Su datos es "+ Dato + " Autor: " + Autor;
     }
 }
