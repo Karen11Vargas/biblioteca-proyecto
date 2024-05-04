@@ -4,7 +4,9 @@
  */
 package interfaz;
 
-import estructura.BibliotecaGestion;
+import estructura.Arbol;
+import estructura.ArbolPrestamo;
+import estructura.ArbolUsuario;
 import javax.swing.JOptionPane;
 
 /**
@@ -43,10 +45,8 @@ public class Menu extends javax.swing.JFrame {
         agregarUsuario = new javax.swing.JButton();
         verUsuarios = new javax.swing.JButton();
         buscarUsuario = new javax.swing.JButton();
-        devolucion = new javax.swing.JButton();
         agregarPrestamo = new javax.swing.JButton();
         prestamoUsuario = new javax.swing.JButton();
-        librosPrestados = new javax.swing.JButton();
         jSeparator2 = new javax.swing.JSeparator();
         agregarLibro1 = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
@@ -65,25 +65,25 @@ public class Menu extends javax.swing.JFrame {
         jSeparator1.setBounds(60, 150, 490, 10);
 
         jLabelMenu2.setFont(new java.awt.Font("Segoe UI Black", 0, 36)); // NOI18N
-        jLabelMenu2.setForeground(new java.awt.Color(255, 102, 102));
+        jLabelMenu2.setForeground(new java.awt.Color(102, 102, 102));
         jLabelMenu2.setText("Biblioteca Virtual");
         getContentPane().add(jLabelMenu2);
         jLabelMenu2.setBounds(160, -10, 330, 70);
 
         jLabelMenu4.setFont(new java.awt.Font("Segoe UI Black", 0, 24)); // NOI18N
-        jLabelMenu4.setForeground(new java.awt.Color(255, 102, 102));
+        jLabelMenu4.setForeground(new java.awt.Color(102, 102, 102));
         jLabelMenu4.setText("Libros");
         getContentPane().add(jLabelMenu4);
         jLabelMenu4.setBounds(80, 100, 110, 50);
 
         jLabelMenu5.setFont(new java.awt.Font("Segoe UI Black", 0, 24)); // NOI18N
-        jLabelMenu5.setForeground(new java.awt.Color(255, 102, 102));
+        jLabelMenu5.setForeground(new java.awt.Color(102, 102, 102));
         jLabelMenu5.setText("Prestamos");
         getContentPane().add(jLabelMenu5);
         jLabelMenu5.setBounds(410, 100, 140, 50);
 
         jLabelMenu6.setFont(new java.awt.Font("Segoe UI Black", 0, 24)); // NOI18N
-        jLabelMenu6.setForeground(new java.awt.Color(255, 102, 102));
+        jLabelMenu6.setForeground(new java.awt.Color(102, 102, 102));
         jLabelMenu6.setText("Usuarios");
         getContentPane().add(jLabelMenu6);
         jLabelMenu6.setBounds(240, 100, 110, 50);
@@ -170,16 +170,6 @@ public class Menu extends javax.swing.JFrame {
         getContentPane().add(buscarUsuario);
         buscarUsuario.setBounds(230, 290, 140, 40);
 
-        devolucion.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        devolucion.setText("Hacer Devolución");
-        devolucion.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                devolucionActionPerformed(evt);
-            }
-        });
-        getContentPane().add(devolucion);
-        devolucion.setBounds(410, 350, 140, 40);
-
         agregarPrestamo.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         agregarPrestamo.setText("Agregar Prestamo");
         agregarPrestamo.addActionListener(new java.awt.event.ActionListener() {
@@ -199,16 +189,6 @@ public class Menu extends javax.swing.JFrame {
         });
         getContentPane().add(prestamoUsuario);
         prestamoUsuario.setBounds(410, 230, 140, 40);
-
-        librosPrestados.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        librosPrestados.setText("Libros Prestados");
-        librosPrestados.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                librosPrestadosActionPerformed(evt);
-            }
-        });
-        getContentPane().add(librosPrestados);
-        librosPrestados.setBounds(410, 290, 140, 40);
         getContentPane().add(jSeparator2);
         jSeparator2.setBounds(200, 50, 200, 10);
 
@@ -233,17 +213,19 @@ public class Menu extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-     BibliotecaGestion gestion = new BibliotecaGestion();
-     
+     Arbol arbolLibreo = new Arbol();
+          ArbolUsuario arbolUsuario = new ArbolUsuario();
+     ArbolPrestamo arbolPrestamo = new ArbolPrestamo();
+
     private void eliminarLibroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_eliminarLibroActionPerformed
-        String nombreELiminar = JOptionPane.showInputDialog("Por favor, introduce nombre del libro:");
-        gestion.eliminarLibro(nombreELiminar);
+//        String nombreELiminar = JOptionPane.showInputDialog("Por favor, introduce nombre del libro:");
+//        gestion.eliminarLibro(nombreELiminar);
 
     }//GEN-LAST:event_eliminarLibroActionPerformed
 
     private void verLibrosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_verLibrosActionPerformed
       
-        gestion.buscarLibro();
+        arbolLibreo.inOrder(arbolLibreo.Raiz);
 
     }//GEN-LAST:event_verLibrosActionPerformed
 
@@ -251,7 +233,7 @@ public class Menu extends javax.swing.JFrame {
         String nombreLibro = JOptionPane.showInputDialog("Ingrese nombre libro a buscar:");
          if (!nombreLibro.isEmpty()) {
   
-                gestion.buscarLibroNombre(nombreLibro);
+                arbolLibreo.buscarLibroPorNombre(arbolLibreo.Raiz,nombreLibro);
 
             } else {
               JOptionPane.showMessageDialog(null, "Debe ingresar el nombre del libro."); 
@@ -266,7 +248,7 @@ public class Menu extends javax.swing.JFrame {
 
             if (!nombre.isEmpty() && !numero.isEmpty()) {
                 int documento = Integer.parseInt(numero);
-                gestion.agregarUsuario(documento,nombre);
+                arbolUsuario.InsertarDatos(documento,nombre);
 
             } else {
               JOptionPane.showMessageDialog(null, "Debe ingresar todos los datos."); 
@@ -277,14 +259,14 @@ public class Menu extends javax.swing.JFrame {
     }//GEN-LAST:event_agregarUsuarioActionPerformed
 
     private void verUsuariosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_verUsuariosActionPerformed
-         gestion.buscarAll();
+         arbolUsuario.inOrder(arbolUsuario.Raiz);
     }//GEN-LAST:event_verUsuariosActionPerformed
 
     private void buscarUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buscarUsuarioActionPerformed
         String nombreUser = JOptionPane.showInputDialog("Ingrese documento a buscar:");
          if (!nombreUser.isEmpty()) {
             int documento = Integer.parseInt(nombreUser);
-            gestion.buscarUser(documento);
+            arbolUsuario.buscarUsuarios(arbolUsuario.Raiz,documento);
 
         } else {
             JOptionPane.showMessageDialog(null, "Debe ingresar el documento del usuario."); 
@@ -293,9 +275,9 @@ public class Menu extends javax.swing.JFrame {
     }//GEN-LAST:event_buscarUsuarioActionPerformed
 
     private void eliminarUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_eliminarUsuarioActionPerformed
-        String nombreELiminar = JOptionPane.showInputDialog("Por favor, introduce documento del usuario:");
-        int documento = Integer.parseInt(nombreELiminar);
-        gestion.eliminarUsuario(documento);
+//        String nombreELiminar = JOptionPane.showInputDialog("Por favor, introduce documento del usuario:");
+//        int documento = Integer.parseInt(nombreELiminar);
+//        gestion.eliminarUsuario(documento);
     }//GEN-LAST:event_eliminarUsuarioActionPerformed
 
     private void agregarPrestamoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_agregarPrestamoActionPerformed
@@ -305,7 +287,7 @@ public class Menu extends javax.swing.JFrame {
 
             if (!doc.isEmpty() && !libro.isEmpty()) {
                 int documento = Integer.parseInt(doc);
-                gestion.agregarPrestamo(documento,libro);
+                arbolPrestamo.InsertarDatos(documento,libro);
 
             } else {
               JOptionPane.showMessageDialog(null, "Debe ingresar todos los datos."); 
@@ -316,61 +298,26 @@ public class Menu extends javax.swing.JFrame {
     }//GEN-LAST:event_agregarPrestamoActionPerformed
 
     private void prestamoUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_prestamoUsuarioActionPerformed
-        String doc = JOptionPane.showInputDialog("Ingrese documento a buscar:");
-         if (!doc.isEmpty()) {
-            int documento = Integer.parseInt(doc);
-            gestion.prestamosUser(documento);
+                 arbolPrestamo.inOrder(arbolPrestamo.Raiz);
 
-        } else {
-            JOptionPane.showMessageDialog(null, "Debe ingresar el documento del usuario."); 
-
-        }
     }//GEN-LAST:event_prestamoUsuarioActionPerformed
 
-    private void librosPrestadosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_librosPrestadosActionPerformed
-         String nombre = JOptionPane.showInputDialog("Ingrese el nombre del libro  a buscar:");
-         if (!nombre.isEmpty()) {
-            gestion.prestamosLibro(nombre);
-
-        } else {
-            JOptionPane.showMessageDialog(null, "Debe ingresar el nombre del libro."); 
-
-        }
-    }//GEN-LAST:event_librosPrestadosActionPerformed
-
-    private void devolucionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_devolucionActionPerformed
-        try {
-            String doc = JOptionPane.showInputDialog("Por favor, introduce el documento del usuario:");
-            String  libro = JOptionPane.showInputDialog("Por favor, introduce el nombre del libro:");
-
-            if (!doc.isEmpty() && !libro.isEmpty()) {
-                int documento = Integer.parseInt(doc);
-                gestion.devolucion(documento,libro);
-
-            } else {
-              JOptionPane.showMessageDialog(null, "Debe ingresar todos los datos."); 
-
-            }
-        } catch (Exception e) {
-        }
-    }//GEN-LAST:event_devolucionActionPerformed
-
     private void agregarLibro1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_agregarLibro1ActionPerformed
-       try {
-            String nombre = JOptionPane.showInputDialog("Por favor, introduce el nombre del libro:");
-            String autor = JOptionPane.showInputDialog("Por favor, introduce el nombre del autor:");
-            String fecha = JOptionPane.showInputDialog("Por favor, introduce el año de publicación:");
-
-            if (!nombre.isEmpty() && !autor.isEmpty() && !fecha.isEmpty()) {
-                int publicacion = Integer.parseInt(fecha);
-                gestion.agregarLibro(nombre, autor, publicacion);
-
-            } else {
-              JOptionPane.showMessageDialog(null, "Debe ingresar todos los datos."); 
-
-            }
-        } catch (Exception e) {
-        }
+//       try {
+//            String nombre = JOptionPane.showInputDialog("Por favor, introduce el nombre del libro:");
+//            String autor = JOptionPane.showInputDialog("Por favor, introduce el nombre del autor:");
+//            String fecha = JOptionPane.showInputDialog("Por favor, introduce el año de publicación:");
+//
+//            if (!nombre.isEmpty() && !autor.isEmpty() && !fecha.isEmpty()) {
+//                int publicacion = Integer.parseInt(fecha);
+//                gestion.agregarLibro(nombre, autor, publicacion);
+//
+//            } else {
+//              JOptionPane.showMessageDialog(null, "Debe ingresar todos los datos."); 
+//
+//            }
+//        } catch (Exception e) {
+//        }
     }//GEN-LAST:event_agregarLibro1ActionPerformed
 
     private void exitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_exitActionPerformed
@@ -418,7 +365,6 @@ public class Menu extends javax.swing.JFrame {
     private javax.swing.JButton agregarUsuario;
     private javax.swing.JButton buscarLibro;
     private javax.swing.JButton buscarUsuario;
-    private javax.swing.JButton devolucion;
     private javax.swing.JButton eliminarLibro;
     private javax.swing.JButton eliminarUsuario;
     private javax.swing.JButton exit;
@@ -431,7 +377,6 @@ public class Menu extends javax.swing.JFrame {
     private javax.swing.JLabel jLabelMenu6;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JSeparator jSeparator2;
-    private javax.swing.JButton librosPrestados;
     private javax.swing.JButton prestamoUsuario;
     private javax.swing.JButton verLibros;
     private javax.swing.JButton verUsuarios;
