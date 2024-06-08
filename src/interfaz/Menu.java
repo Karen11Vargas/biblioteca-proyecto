@@ -4,12 +4,10 @@
  */
 package interfaz;
 
-import estructura.Arbol;
-import estructura.ArbolPrestamo;
-import estructura.ArbolUsuario;
-import estructura.LibroNodo;
-import estructura.PrestamoNodo;
-import estructura.UsuarioNodo;
+
+import estructura.Grafo;
+import estructura.NodoLibro;
+import estructura.NodoUsuario;
 import javax.swing.JOptionPane;
 
 /**
@@ -40,16 +38,11 @@ public class Menu extends javax.swing.JFrame {
         jLabelMenu4 = new javax.swing.JLabel();
         jLabelMenu5 = new javax.swing.JLabel();
         jLabelMenu6 = new javax.swing.JLabel();
-        eliminarLibro = new javax.swing.JButton();
         exit = new javax.swing.JButton();
-        verLibros = new javax.swing.JButton();
         buscarLibro = new javax.swing.JButton();
-        eliminarUsuario = new javax.swing.JButton();
         agregarUsuario = new javax.swing.JButton();
-        verUsuarios = new javax.swing.JButton();
         buscarUsuario = new javax.swing.JButton();
         agregarPrestamo = new javax.swing.JButton();
-        Prestamos = new javax.swing.JButton();
         jSeparator2 = new javax.swing.JSeparator();
         agregarLibro1 = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
@@ -92,16 +85,6 @@ public class Menu extends javax.swing.JFrame {
         getContentPane().add(jLabelMenu6);
         jLabelMenu6.setBounds(240, 100, 110, 50);
 
-        eliminarLibro.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        eliminarLibro.setText("Eliminar Libro");
-        eliminarLibro.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                eliminarLibroActionPerformed(evt);
-            }
-        });
-        getContentPane().add(eliminarLibro);
-        eliminarLibro.setBounds(50, 350, 130, 40);
-
         exit.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         exit.setText("Salir");
         exit.addActionListener(new java.awt.event.ActionListener() {
@@ -112,16 +95,6 @@ public class Menu extends javax.swing.JFrame {
         getContentPane().add(exit);
         exit.setBounds(550, 10, 60, 30);
 
-        verLibros.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        verLibros.setText("Ver Libros");
-        verLibros.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                verLibrosActionPerformed(evt);
-            }
-        });
-        getContentPane().add(verLibros);
-        verLibros.setBounds(50, 230, 130, 40);
-
         buscarLibro.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         buscarLibro.setText("Buscar Libro");
         buscarLibro.setToolTipText("");
@@ -131,17 +104,7 @@ public class Menu extends javax.swing.JFrame {
             }
         });
         getContentPane().add(buscarLibro);
-        buscarLibro.setBounds(50, 290, 130, 40);
-
-        eliminarUsuario.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        eliminarUsuario.setText("Eliminar Usuario");
-        eliminarUsuario.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                eliminarUsuarioActionPerformed(evt);
-            }
-        });
-        getContentPane().add(eliminarUsuario);
-        eliminarUsuario.setBounds(230, 350, 140, 40);
+        buscarLibro.setBounds(50, 240, 130, 40);
 
         agregarUsuario.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         agregarUsuario.setText("Agregar Usuario");
@@ -154,16 +117,6 @@ public class Menu extends javax.swing.JFrame {
         getContentPane().add(agregarUsuario);
         agregarUsuario.setBounds(230, 170, 140, 40);
 
-        verUsuarios.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        verUsuarios.setText("Ver Usuarios");
-        verUsuarios.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                verUsuariosActionPerformed(evt);
-            }
-        });
-        getContentPane().add(verUsuarios);
-        verUsuarios.setBounds(230, 230, 140, 40);
-
         buscarUsuario.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         buscarUsuario.setText("Buscar Usuario");
         buscarUsuario.addActionListener(new java.awt.event.ActionListener() {
@@ -172,7 +125,7 @@ public class Menu extends javax.swing.JFrame {
             }
         });
         getContentPane().add(buscarUsuario);
-        buscarUsuario.setBounds(230, 290, 140, 40);
+        buscarUsuario.setBounds(230, 240, 140, 40);
 
         agregarPrestamo.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         agregarPrestamo.setText("Agregar Prestamo");
@@ -183,16 +136,6 @@ public class Menu extends javax.swing.JFrame {
         });
         getContentPane().add(agregarPrestamo);
         agregarPrestamo.setBounds(410, 170, 140, 40);
-
-        Prestamos.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        Prestamos.setText("Prestamos");
-        Prestamos.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                PrestamosActionPerformed(evt);
-            }
-        });
-        getContentPane().add(Prestamos);
-        Prestamos.setBounds(410, 300, 140, 40);
         getContentPane().add(jSeparator2);
         jSeparator2.setBounds(200, 50, 200, 10);
 
@@ -208,7 +151,7 @@ public class Menu extends javax.swing.JFrame {
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/interfaz/img/ac1.png"))); // NOI18N
         getContentPane().add(jLabel1);
-        jLabel1.setBounds(-30, 290, 450, 180);
+        jLabel1.setBounds(-30, 180, 450, 180);
 
         jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/interfaz/img/ac.png"))); // NOI18N
         getContentPane().add(jLabel2);
@@ -222,50 +165,27 @@ public class Menu extends javax.swing.JFrame {
             }
         });
         getContentPane().add(prestamoUsuario1);
-        prestamoUsuario1.setBounds(410, 230, 140, 40);
+        prestamoUsuario1.setBounds(410, 240, 140, 40);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-     Arbol arbolLibreo = new Arbol();
-          ArbolUsuario arbolUsuario = new ArbolUsuario();
-     ArbolPrestamo arbolPrestamo = new ArbolPrestamo();
-
-    private void eliminarLibroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_eliminarLibroActionPerformed
-        String input = JOptionPane.showInputDialog("Por favor, introduce nombre del libro:");
-         if (!input.isEmpty()) {
-                int id = Integer.parseInt(input);
-                arbolLibreo.eliminar(id);
-
-            } else {
-              JOptionPane.showMessageDialog(null, "Debe ingresar todos los datos."); 
-
-            }
-        
-
-    }//GEN-LAST:event_eliminarLibroActionPerformed
-
-    private void verLibrosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_verLibrosActionPerformed
-        if (!arbolLibreo.estaVacio()){
-            JOptionPane.showMessageDialog(null, "Los Libros se mostraran en consola a continuacion:\n", "Libros", JOptionPane.PLAIN_MESSAGE);
-            arbolLibreo.inOrder(arbolLibreo.Raiz);
-        }
-        else 
-            JOptionPane.showMessageDialog(null, "No hay libros", "Arbol", JOptionPane.INFORMATION_MESSAGE);
-        ; 
-    }//GEN-LAST:event_verLibrosActionPerformed
+        Grafo grafo = new Grafo();
 
     private void buscarLibroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buscarLibroActionPerformed
-        String nombreLibro = JOptionPane.showInputDialog("Ingrese nombre libro a buscar:");
-         if (!nombreLibro.isEmpty()) {
-                LibroNodo libroEncontrado =  arbolLibreo.buscarLibroPorNombre(arbolLibreo.Raiz, nombreLibro);
-                if (libroEncontrado != null) {
-                    JOptionPane.showMessageDialog(null, "El libro se mostrara en consola a continuación:\n", "Libros", JOptionPane.PLAIN_MESSAGE);
+        String idLibro = JOptionPane.showInputDialog("Ingrese id del libro a buscar:");
+            if (!idLibro.isEmpty()) {
+
+                NodoLibro libro = grafo.buscarLibro(idLibro);
+                if (libro != null) {
+                    JOptionPane.showMessageDialog(null, "Libro encontrado: " +"id: "+ libro.getId()+" nombre: "+ libro.getTitulo());
+
+                    System.out.println("Libro encontrado: " + libro.getTitulo());
                 } else {
-                    JOptionPane.showMessageDialog(null, "No se encontro el libro", "Árbol", JOptionPane.INFORMATION_MESSAGE);
+                    JOptionPane.showMessageDialog(null, "No se encontro el libro", "Grafo", JOptionPane.INFORMATION_MESSAGE);
                 }
-            } else {
-              JOptionPane.showMessageDialog(null, "Debe ingresar el nombre del libro."); 
+            }else{
+                JOptionPane.showMessageDialog(null, "Debe ingresar el nombre del libro."); 
 
             }
     }//GEN-LAST:event_buscarLibroActionPerformed
@@ -276,9 +196,10 @@ public class Menu extends javax.swing.JFrame {
             String nombre = JOptionPane.showInputDialog("Por favor, introduce el nombre del usuario:");
 
             if (!nombre.isEmpty() && !numero.isEmpty()) {
-                int documento = Integer.parseInt(numero);
-                arbolUsuario.InsertarDatos(documento,nombre);
-
+               
+                grafo.agregarUsuario(numero, nombre);
+              JOptionPane.showMessageDialog(null, "Ingresado con exito"); 
+              
             } else {
               JOptionPane.showMessageDialog(null, "Debe ingresar todos los datos."); 
 
@@ -287,56 +208,30 @@ public class Menu extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_agregarUsuarioActionPerformed
 
-    private void verUsuariosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_verUsuariosActionPerformed
-         
-         if (!arbolUsuario.estaVacio()){
-            JOptionPane.showMessageDialog(null, "Los Usuarios se mostraran en consola a continuacion:\n", "Usuarios", JOptionPane.PLAIN_MESSAGE);
-            arbolUsuario.inOrder(arbolUsuario.Raiz);
-        }
-        else 
-            JOptionPane.showMessageDialog(null, "No hay Usuarios", "Arbol", JOptionPane.INFORMATION_MESSAGE);
-        ; 
-    }//GEN-LAST:event_verUsuariosActionPerformed
-
     private void buscarUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buscarUsuarioActionPerformed
-        String nombreUser = JOptionPane.showInputDialog("Ingrese documento a buscar:");
-         if (!nombreUser.isEmpty()) {
-            int documento = Integer.parseInt(nombreUser);
-             UsuarioNodo userEncontrado = arbolUsuario.buscarUsuarios(arbolUsuario.Raiz,documento);
+          String idUser = JOptionPane.showInputDialog("Ingrese id del usuario a buscar:");
+            if (!idUser.isEmpty()) {
 
-                if (userEncontrado != null) {
-                    JOptionPane.showMessageDialog(null, "El usuario se mostrara en consola a continuación:\n", "Usuarios", JOptionPane.PLAIN_MESSAGE);
+                NodoUsuario usuario = grafo.buscarUsuario(idUser);
+                if (usuario != null) {
+                    JOptionPane.showMessageDialog(null, "Usuario encontrado: " +" Documento: "+usuario.getId()+" Nombre: "+usuario.getNombre());
                 } else {
-                    JOptionPane.showMessageDialog(null, "No se encontro el usuario", "Usuarios", JOptionPane.INFORMATION_MESSAGE);
+                    JOptionPane.showMessageDialog(null, "No se encontro el usuario", "Grafo", JOptionPane.INFORMATION_MESSAGE);
                 }
-
-        } else {
-            JOptionPane.showMessageDialog(null, "Debe ingresar el documento del usuario."); 
-
-        }
-    }//GEN-LAST:event_buscarUsuarioActionPerformed
-
-    private void eliminarUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_eliminarUsuarioActionPerformed
-
-        String input = JOptionPane.showInputDialog("Por favor, introduce documento del usuario:");
-         if (!input.isEmpty()) {
-                int id = Integer.parseInt(input);
-                arbolUsuario.eliminar(id);
-
-            } else {
-              JOptionPane.showMessageDialog(null, "Debe ingresar todos los datos."); 
+            }else{
+                JOptionPane.showMessageDialog(null, "Debe ingresar el id del usuario."); 
 
             }
-    }//GEN-LAST:event_eliminarUsuarioActionPerformed
+    }//GEN-LAST:event_buscarUsuarioActionPerformed
 
     private void agregarPrestamoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_agregarPrestamoActionPerformed
          try {
             String doc = JOptionPane.showInputDialog("Por favor, introduce el documento del usuario:");
-            String  libro = JOptionPane.showInputDialog("Por favor, introduce el nombre del libro:");
+            String  libro = JOptionPane.showInputDialog("Por favor, introduce el id del libro:");
 
             if (!doc.isEmpty() && !libro.isEmpty()) {
-                int documento = Integer.parseInt(doc);
-                arbolPrestamo.InsertarDatos(documento,libro);
+              grafo.realizarPrestamo(doc, libro, "08-06-2024");
+              JOptionPane.showMessageDialog(null, "Ingresado"); 
 
             } else {
               JOptionPane.showMessageDialog(null, "Debe ingresar todos los datos."); 
@@ -346,27 +241,16 @@ public class Menu extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_agregarPrestamoActionPerformed
 
-    private void PrestamosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_PrestamosActionPerformed
-         if (!arbolPrestamo.estaVacio()){
-            JOptionPane.showMessageDialog(null, "Los Prestamos se mostraran en consola a continuacion:\n", "Prestamos", JOptionPane.PLAIN_MESSAGE);
-            arbolPrestamo.inOrder(arbolPrestamo.Raiz);        }
-        else 
-            JOptionPane.showMessageDialog(null, "No hay Prestamos", "Arbol", JOptionPane.INFORMATION_MESSAGE);
-        ;          
-        
-
-    }//GEN-LAST:event_PrestamosActionPerformed
-
     private void agregarLibro1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_agregarLibro1ActionPerformed
-         try {
+          try {
             String numero = JOptionPane.showInputDialog("Por favor, introduce el id del libro:");
             String nombre = JOptionPane.showInputDialog("Por favor, introduce el nombre del libro:");
-            String autor = JOptionPane.showInputDialog("Por favor, introduce el nombre del autor:");
 
-            if (!nombre.isEmpty() && !numero.isEmpty() && !autor.isEmpty()) {
-                int id = Integer.parseInt(numero);
-                arbolLibreo.InsertarDatos(id,nombre,autor);
-
+            if (!nombre.isEmpty() && !numero.isEmpty()) {
+               
+               grafo.agregarLibro(numero, nombre);
+              JOptionPane.showMessageDialog(null, "Ingresado"); 
+              
             } else {
               JOptionPane.showMessageDialog(null, "Debe ingresar todos los datos."); 
 
@@ -381,17 +265,11 @@ public class Menu extends javax.swing.JFrame {
     }//GEN-LAST:event_exitActionPerformed
 
     private void prestamoUsuario1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_prestamoUsuario1ActionPerformed
-         String nombreUser = JOptionPane.showInputDialog("Ingrese documento a buscar:");
-         if (!nombreUser.isEmpty()) {
-            int documento = Integer.parseInt(nombreUser);
-             PrestamoNodo presEncontrado = arbolPrestamo.buscarPrestamo(arbolPrestamo.Raiz,documento);
+         String docUser = JOptionPane.showInputDialog("Ingrese documento del usuario a buscar:");
+         if (!docUser.isEmpty()) {
+                grafo.obtenerPrestamosUsuario(docUser);
 
-                if (presEncontrado != null) {
-                    JOptionPane.showMessageDialog(null, "El prestamos se mostrara en consola a continuación:\n", "Prestamos", JOptionPane.PLAIN_MESSAGE);
-                } else {
-                    JOptionPane.showMessageDialog(null, "No se encontro el prestamos de ese usuario", "Prestamos", JOptionPane.INFORMATION_MESSAGE);
-                }
-
+             
         } else {
             JOptionPane.showMessageDialog(null, "Debe ingresar el documento del usuario."); 
 
@@ -434,14 +312,11 @@ public class Menu extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton Prestamos;
     private javax.swing.JButton agregarLibro1;
     private javax.swing.JButton agregarPrestamo;
     private javax.swing.JButton agregarUsuario;
     private javax.swing.JButton buscarLibro;
     private javax.swing.JButton buscarUsuario;
-    private javax.swing.JButton eliminarLibro;
-    private javax.swing.JButton eliminarUsuario;
     private javax.swing.JButton exit;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
@@ -453,7 +328,5 @@ public class Menu extends javax.swing.JFrame {
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JSeparator jSeparator2;
     private javax.swing.JButton prestamoUsuario1;
-    private javax.swing.JButton verLibros;
-    private javax.swing.JButton verUsuarios;
     // End of variables declaration//GEN-END:variables
 }
