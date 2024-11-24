@@ -1,12 +1,11 @@
 <h1 align="center"><b>🖥️ GUI con Java Gestion de biblioteca </b></h1>
 <h3>🌼 Trabajo para la universidad, donde se trabajaron estructuras de datos para la gestión de una biblioteca</h3><br>
 
-<p align="center"><img src="archivos/1.png" width="600"/></p> 
-<p align="center"><img src="archivos/2.png" width="600"/></p> 
-<p align="center"><img src="archivos/3.png" width="600"/></p>
-<p align="center"><img src="archivos/4.png" width="600"/></p>
-
-## Construido con 🛠️
+<p align="center"><img src="1.png" width="600"/></p> 
+<p align="center"><img src="2.png" width="600"/></p> 
+<p align="center"><img src="3.png" width="600"/></p>
+<p align="center"><img src="4.png" width="600"/></p>
+Construido con 🛠️
 
 _Herramientas Utilizadas_
 
